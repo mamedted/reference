@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/main.css" />
+    <script src="../../js/helper.js"></script>
+    <script src="../../js/modal.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <h1 class="green mt10 mb20">Array Method</h1>
+
+    <div>
+      <input
+        class="px22 inp name wd200"
+        type="text"
+        placeholder="add here"
+        name=""
+        id=""
+      />
+      <button class="btn bg-green" onclick="add()">Add</button>
+    </div>
+
+    <div class="wd400 preview flex gap10 fcx padl10 ofy padt5 mt10"></div>
+
+    <div class="flex wd250 ht400 column gap5 mt20 ofy">
+      <div class="flex">
+        <input class="wd100 pad5" type="text" name="" id="" disabled />
+        <button class="pad10" onclick="length()">length</button>
+      </div>
+
+      <div class="flex">
+        <input
+          class="wd100 pad5 push"
+          type="text"
+          value="mango"
+          name=""
+          id=""
+        />
+        <button class="pad10" onclick="push1()">push(a)</button>
+      </div>
+
+      <div class="flex">
+        <input class="wd100 pad5 pop" type="text" disabled name="" id="" />
+        <button class="pad10" onclick="pop1()">pop(a)</button>
+      </div>
+
+      <div class="flex">
+        <input
+          class="wd100 pad5 unshift"
+          type="text"
+          value="lemon"
+          name=""
+          id=""
+        />
+        <button class="pad10" onclick="unshift()">unshift(a)</button>
+      </div>
+
+      <div class="flex">
+        <input class="wd100 pad5 shift" type="text" disabled name="" id="" />
+        <button class="pad10" onclick="shift1()">shift(a)</button>
+      </div>
+
+      <div class="flex">
+        <input class="wd100 pad5 index" type="text" value="3" name="" id="" />
+        <button class="pad10" onclick="index()">index[n]</button>
+      </div>
+
+      <div class="flex">
+        <input
+          class="wd100 pad5 indexat"
+          type="text"
+          value="-1"
+          name=""
+          id=""
+        />
+        <button class="pad10" onclick="indexat()">array.at(n)</button>
+      </div>
+
+      <div class="flex">
+        <input
+          class="wd100 pad5 indexof"
+          value="grapes"
+          type="text"
+          name=""
+          id=""
+        />
+        <button class="pad10" onclick="indexof()">indexOf(a)</button>
+      </div>
+
+      <div class="flex">
+        <input
+          class="wd100 pad5 lastindex"
+          value="grapes"
+          type="text"
+          name=""
+          id=""
+        />
+        <button class="pad10" onclick="lastindex()">lastIndexOf(a)</button>
+      </div>
+
+      <div class="flex">
+        <input class="wd100 pad5" disabled type="text" name="" id="" />
+        <button class="pad10" onclick="sort1()">sort()</button>
+      </div>
+
+      <div class="flex">
+        <input class="wd100 pad5" disabled type="text" name="" id="" />
+        <button class="pad10" onclick="sort2()">
+          array.sort((a, b) => a - b )
+        </button>
+      </div>
+
+      <div class="flex">
+        <input class="wd100 pad5" disabled type="text" name="" id="" />
+        <button class="pad10" onclick="sort3()">
+          array.sort((a, b) => b - a )
+        </button>
+      </div>
+
+      <div class="flex">
+        <input class="wd100 pad5" disabled type="text" name="" id="" />
+        <button class="pad10" onclick="reverse()">reverse()</button>
+      </div>
+
+      <div class="flex">
+        <input class="wd100 pad5" disabled type="text" name="" id="" />
+        <button class="pad10" onclick="join1()">join("")</button>
+      </div>
+
+      <div class="flex">
+        <input class="wd100 pad5 join2" value=" " type="text" name="" id="" />
+        <button class="pad10" onclick="join2()">join(" ")</button>
+      </div>
+
+      <div class="flex">
+        <input class="wd100 pad5 splice" value=" " type="text" name="" id="" />
+        <button class="pad10" onclick="splice1()">splice(index, n )</button>
+      </div>
+
+      <div class="flex">
+        <input class="wd100 pad5 slice" value=" " type="text" name="" id="" />
+        <button class="pad10" onclick="slice1()">slice(index)</button>
+      </div>
+
+      <div class="flex">
+        <input
+          class="wd100 pad5"
+          disabled
+          value=" "
+          type="text"
+          name=""
+          id=""
+        />
+        <button class="pad10" onclick="max1()">Math.max(...array)</button>
+      </div>
+
+      <div class="flex">
+        <input
+          class="wd100 pad5"
+          disabled
+          value=" "
+          type="text"
+          name=""
+          id=""
+        />
+        <button class="pad10" onclick="min1()">Math.min(...array)</button>
+      </div>
+    </div>
+
+    <script>
+      let array = ["apple", "orange", "grapes", "banana"];
+      let preview = q(".preview");
+      let name = q(".name");
+
+      function display() {
+        preview.innerHTML = "";
+        array.forEach((item) => {
+          let p = create("p");
+          p.innerText = item + ",";
+          preview.append(p);
+        });
+      }
+
+      function add() {
+        array.push(name.value);
+        display();
+      }
+
+      function length() {
+        alert2(array.length);
+      }
+
+      function push1() {
+        let a = q(".push").value;
+        let b = array.push(a);
+
+        display();
+
+        alert2(array);
+      }
+
+      function pop1() {
+        let a = q(".pop").value;
+        let b = array.pop(a);
+
+        display();
+
+        alert2(b);
+      }
+
+      function unshift() {
+        let a = q(".unshift").value;
+        let b = array.unshift(a);
+
+        display();
+
+        alert2(array);
+      }
+
+      function shift1() {
+        let a = q(".shift").value;
+        let b = array.shift(a);
+
+        display();
+
+        alert2(b);
+      }
+
+      function index() {
+        let index = q(".index").value;
+
+        alert2(array[index]);
+      }
+
+      function indexof() {
+        let a = q(".indexof").value;
+
+        alert2(array.indexOf(a));
+      }
+
+      function reverse() {
+        let a = array.reverse();
+        display();
+
+        alert2(a);
+      }
+
+      function indexat() {
+        let a = q(".indexat").value;
+        let b = array.at(a);
+
+        alert2(b);
+      }
+
+      function lastindex() {
+        let a = q(".lastindex").value;
+        let b = array.lastIndexOf(a);
+
+        alert2(b);
+      }
+
+      function join1() {
+        alert2(array.join(""));
+      }
+
+      function join2() {
+        let a = q(".join2").value;
+        let b = array.join(a);
+
+        alert2(b);
+      }
+
+      function sort1() {
+        let a = array.sort();
+        alert2(a);
+        display();
+      }
+
+      function sort2() {
+        let a = array.sort((a, b) => a - b);
+
+        alert2(a);
+        display();
+      }
+
+      function sort3() {
+        let a = array.sort((a, b) => b - a);
+
+        alert2(a);
+        display();
+      }
+
+      function splice1() {
+        let x = q(".splice").value.split(",");
+        let [a, b] = x;
+
+        let c = array.splice(a, b);
+        alert2(c);
+        display();
+        6;
+      }
+
+      function slice1() {
+        let a = q(".slice").value;
+
+        let b = array.slice(a);
+
+        alert2(b);
+      }
+
+      function max1() {
+        let a = Math.max(...array);
+        alert2(a);
+      }
+
+      function min1() {
+        let a = Math.min(...array);
+        alert2(a);
+      }
+
+      display();
+    </script>
+  </body>
+</html>

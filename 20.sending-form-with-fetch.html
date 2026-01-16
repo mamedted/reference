@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../js/helper.js"></script>
+    <script src="../js/modal.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <h1 class="green mt10">Sending Data Form With Fetch</h1>
+
+    <form class="flex column gap5" action="server.php" method="post">
+      <input class="inp" type="text" name="name" id="" />
+      <input class="inp" type="text" name="age" id="" />
+    </form>
+    <button class="mt10 btn bg-green" onclick="send()">Send</button>
+    <script>
+      function send() {
+        let form = q("form");
+        let data = new FormData(form);
+
+        fetch("server.php", {
+          method: "POST",
+          body: data
+        })
+          .then((res) => res.text())
+          .then((data) => console.log(data));
+      }
+    </script>
+  </body>
+</html>

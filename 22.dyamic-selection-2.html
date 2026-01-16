@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../js/helper.js"></script>
+    <script src="../js/modal.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <h1 class="mt20 green">Dynamic Selection 2</h1>
+    <select name="" id="category" onchange="loadItem()">
+      <option value="" disabled selected>Choose category</option>
+    </select>
+
+    <select name="" id="item">
+      <option value="">Choose item</option>
+    </select>
+    <script>
+      const object = {
+        Person: ["John", "Kenneth", "Martin"],
+        Animal: ["Cat", "Dog", "Bird"],
+        Food: ["apple", "banana", "mango"]
+      };
+
+      let category = q("#category");
+      let item = q("#item");
+
+      let keys = Object.keys(object);
+      keys.forEach((ele) => {
+        let li = create("option");
+        li.innerText = ele;
+        category.append(li);
+      });
+
+      function loadItem() {
+        item.innerHTML = "";
+
+        let values = object[category.value];
+        values.forEach((ele) => {
+          let li = create("option");
+          li.innerText = ele;
+          item.append(li);
+        });
+      }
+    </script>
+  </body>
+</html>

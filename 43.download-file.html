@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../js/helper.js"></script>
+    <script src="../js/modal.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <header>
+      <h1 class="green mt10">Download File</h1>
+    </header>
+
+    <div class="wdp90 htp70 br">
+      <img class="hm wm fit" src="../file-shared/1000085650.jpg" alt="" />
+    </div>
+
+    <button class="btn bg-green" onclick="donwload()">Download</button>
+
+    <script>
+      function donwload() {
+        let pic = q("img");
+        let a = create("a");
+        a.href = pic.src;
+        a.download = q("img")["name"]; //this is the key
+
+        q("body").append(a);
+        a.click();
+      }
+    </script>
+  </body>
+</html>

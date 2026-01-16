@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../helper.css" />
+    <script src="../../helper.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+      padding-top: 20px;
+    }
+  </style>
+  <body>
+    <h1>Data Types</h1>
+
+    <script>
+      let string = "Jason"; //Textual data, can be enclose by "", '' or ``
+      let number = 1; //use for interger and floating
+      let bigInt = 53474493232032932323; //use to represent large integers
+      let boolean = true; //Can only have two value; true or false. Use for conditional logic
+      let xx; //declared but has not been assigned a value
+      let xy = null; //intentional absence of value
+
+      let array = ["Jason", "Mark", "Kenneth"];
+      let object = { name: "Jason", age: "Male" };
+
+      let arrayb = [
+        "Jason",
+        15,
+        true,
+        { sport: "baskeball" },
+        function add() {
+          return 1;
+        },
+      ]; //array with different data types
+      let arrayc = ["Jason", ["basketball", "volleyball"]]; //nested array
+
+      let userProfile = {
+        firstname: "Jason",
+        lastname: "Cruz",
+        Age: 16,
+        Gender: "Male",
+        isProgrammer: false,
+
+        Contact: {
+          email: "jason@gmail.com",
+          number: "09652765444",
+        },
+
+        Hobbies: ["Basketball", "Singing", "Dancing"],
+      }; //Object with different data types
+
+      console.log(userProfile);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../js/helper.js"></script>
+    <script src="../js/modal.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <h1 class="mt10 green">Display With Button</h1>
+    <input class="inp name" type="text" name="" id="" />
+
+    <button onclick="handleAdd()" class="btn bg-green">Button</button>
+
+    <div class="preview wd300 ht450 br flex column gap5"></div>
+
+    <script>
+      let names = [];
+
+      function handleAdd() {
+        let preview = q(".preview");
+        let name = q(".name").value;
+        names.push(name);
+
+        preview.innerHTML = "";
+        names.forEach((ele, index) => {
+          let div = create("div");
+          div.classList.add("flex", "fcy", "between", "pad2");
+          div.innerHTML = `
+        <p>${index + 1}. ${ele}</p>
+        <div> 
+            <button class="bg-green white bn padtb4 brr4 padrl8 editBtn">Edit</button>
+            <button class="bg-red white bn padtb4 brr4 padrl8">Delete</button>
+        </div>
+        `;
+
+          let editBtn = div.querySelector(".editBtn");
+          editBtn.addEventListener("click", function () {
+            let updated = prompt2("Edit name", ele);
+          });
+
+          preview.append(div);
+        });
+      }
+
+      let buttons = qa(".btn");
+
+      k("`", () => alert2(buttons.length));
+    </script>
+  </body>
+</html>

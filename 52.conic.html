@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../js/helper.js"></script>
+    <script src="../js/modal.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    :root {
+      --percent: 0;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+    div {
+      /* harder way */
+      /* background: conic-gradient(red calc(var(--percent) * 1%), rgb(158, 154, 154) 0); */
+
+      /* easy way */
+      background: conic-gradient(red 0%, rgb(158, 154, 154) 0);
+      transition: 0.3s linear;
+    }
+  </style>
+  <body>
+    <h1 class="green mt10">Conic</h1>
+
+    <div class="wh100 rounded fxy conic">
+      <span style="background: #dfe2e7" class="wh80 rounded"></span>
+    </div>
+
+    <script>
+      let b = 10;
+      function hide(a) {
+        a.style.display = "none";
+      }
+
+      function a() {
+        let conic = q(".conic");
+        conic.style.setProperty("background", `conic-gradient(red ${b}%, rgb(158, 154, 154) 0)`);
+      }
+
+      k("`", () => {
+        a();
+      });
+
+      //  k('~', () =>  )
+    </script>
+  </body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../js/helper.js"></script>
+    <script src="../js/modal.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <header>
+      <h1 class="green mt10">Video Controller</h1>
+    </header>
+
+    <div class="br wdp90 htp70 ht50">
+      <video class="wm hm" src="../file-shared/1000068094.mp4"></video>
+    </div>
+    <div class="wm flex fcx fcy mt10 mb15">
+      <p class="timedisplay">0:00 / 0: 00</p>
+    </div>
+    <div class="flex gap10">
+      <button onclick="backwardBtn()">BACKWARD</button>
+      <button onclick="forwardBtn()">FORWARD</button>
+      <button onclick="pauseBtn()">PAUSE</button>
+      <button onclick="playBtn()">PLAY</button>
+      <button onclick="replayBtn()">REPLAY</button>
+      <button onclick="muteBtn()">MUTE</button>
+      <button onclick="unmuteBtn()">UNMUTE</button>
+    </div>
+
+    <script>
+      function formatTime(s) {
+        const mins = Math.floor(s / 60);
+        const secs = Math.floor(s % 60)
+          .toString()
+          .padStart(2, "0");
+        return `${mins}:${secs}`;
+      }
+
+      q("video").addEventListener("loadedmetadata", () => {
+        q(".timedisplay").textContent = `0:00 / ${formatTime(q("video").duration)}`;
+      });
+
+      q("video").addEventListener("timeupdate", () => {
+        q(".timedisplay").textContent = `${formatTime(q("video").currentTime)} / ${formatTime(q("video").duration)}`;
+      });
+
+      function pauseBtn() {
+        q("video").pause();
+      }
+
+      function playBtn() {
+        q("video").play();
+      }
+
+      function backwardBtn() {
+        q("video").currentTime = Math.max(0, q("video").currentTime - 10);
+      }
+
+      function forwardBtn() {
+        q("video").currentTime = Math.max(0, q("video").currentTime + 10);
+      }
+
+      function replayBtn() {
+        q("video").currentTime = 0;
+        q("video").play();
+      }
+
+      function muteBtn() {
+        q("video").muted = true;
+      }
+
+      function unmuteBtn() {
+        q("video").muted = false;
+      }
+    </script>
+  </body>
+</html>

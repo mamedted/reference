@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/main.css" />
+    <script src="../../js/helper.js"></script>
+    <script src="../../js/modal.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+    h2 {
+      margin-top: 50px;
+    }
+    #listBox {
+      width: 30%;
+      height: 400px;
+      padding: 30px 20px 0px 50px;
+      font-weight: bold;
+    }
+    #listBox p {
+      font-size: 20px;
+    }
+  </style>
+  <body>
+    <h1>ARRAY LOCAL STORAGE</h1>
+
+    <input
+      type="text"
+      name=""
+      id="inputName"
+      placeholder="Enter subject name"
+    />
+    <button onclick="handleAdd()">Add</button>
+
+    <h2>MY FAVOURITE SUBJECTS</h2>
+
+    <div id="listBox"></div>
+
+    <script>
+      let inputName = document.querySelector("#inputName");
+      let listBox = document.querySelector("#listBox");
+
+      let list = JSON.parse(localStorage.getItem("list2")) || [];
+
+      function handleAdd() {
+        list.push(inputName.value);
+        localStorage.setItem("list2", JSON.stringify(list));
+
+        listBox.innerHTML = "";
+
+        list.forEach((i) => {
+          let p = document.createElement("P");
+          p.innerHTML = i;
+          listBox.append(p);
+        });
+      }
+
+      window.onload = () => {
+        listBox.innerHTML = "";
+
+        list.forEach((i) => {
+          let p = document.createElement("P");
+          p.innerHTML = i;
+          listBox.append(p);
+        });
+      };
+    </script>
+  </body>
+</html>

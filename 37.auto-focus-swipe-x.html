@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../js/helper.js"></script>
+    <script src="../js/modal.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+    main {
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+    }
+    main div {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+  </style>
+  <body>
+    <header>
+      <h1 class="green mt10">Auto-focus swipe X</h1>
+    </header>
+
+    <main class="wd400 hm ofx flex gap10">
+      <div class="wm hm bg-green noshrink"></div>
+      <div class="wm hm bg-red noshrink"></div>
+      <div class="wm hm bg-black noshrink"></div>
+    </main>
+
+    <script></script>
+  </body>
+</html>

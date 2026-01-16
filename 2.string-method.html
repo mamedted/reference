@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../js/helper.js"></script>
+    <script src="../js/modal.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <h1 class="green mt10 mb20">String Method</h1>
+
+    <input
+      class="px22 string wd200"
+      type="text"
+      value="hello world"
+      name=""
+      id=""
+      oninput="changeString(this)"
+    />
+
+    <div class="flex wd250 column gap5 mt10 ofy">
+      <div class="flex">
+        <input class="wd100 pad5" type="text" name="" id="" disabled />
+        <button onclick="length()">length</button>
+      </div>
+
+      <div class="flex">
+        <input class="wd100 pad5 charAt" value="0" type="text" name="" id="" />
+        <button onclick="charAt()">charAt(n)</button>
+      </div>
+
+      <div class="flex">
+        <input class="wd100 pad5 slice" value="1" type="text" name="" id="" />
+        <button onclick="slice()">Slice(n)</button>
+      </div>
+
+      <div class="flex">
+        <input
+          class="wd100 pad5 slice2"
+          value="0,5"
+          type="text"
+          name=""
+          id=""
+        />
+        <button onclick="slice2()">Slice(s, e)</button>
+      </div>
+
+      <div class="flex">
+        <input
+          class="wd100 pad5 slice2 replace"
+          value="hello,hi"
+          type="text"
+          name=""
+          id=""
+        />
+        <button onclick="replace()">replace(a, b)</button>
+      </div>
+
+      <div class="flex">
+        <input
+          class="wd100 pad5 slice2 replaceall"
+          value="o,a"
+          type="text"
+          name=""
+          id=""
+        />
+        <button onclick="replaceall()">replaceAll(a, b)</button>
+      </div>
+
+      <div class="flex">
+        <input class="wd100 pad5 slice2" type="text" name="" id="" disabled />
+        <button onclick="toLowerCase1()">toLowerCase()</button>
+      </div>
+
+      <div class="flex">
+        <input class="wd100 pad5 slice2" type="text" name="" id="" disabled />
+        <button onclick="toUpperCase1()">toUpperCase()</button>
+      </div>
+
+      <div class="flex">
+        <input class="wd100 pad5 slice2" type="text" name="" id="" disabled />
+        <button onclick="trimstart()">trim()</button>
+      </div>
+
+      <div class="flex">
+        <input class="wd100 pad5 slice2" type="text" name="" id="" disabled />
+        <button onclick="split1()">split("")</button>
+      </div>
+
+      <div class="flex">
+        <input class="wd100 pad5 slice2" type="text" name="" id="" disabled />
+        <button onclick="split2()">split(" ")</button>
+      </div>
+
+      <div class="flex">
+        <input
+          class="wd100 pad5 slice2 repeat"
+          value="2"
+          type="text"
+          name=""
+          id=""
+        />
+        <button onclick="repeata()">repeat(n)</button>
+      </div>
+
+      <div class="flex">
+        <input
+          class="wd100 pad5 slice2 startWith"
+          value="he"
+          type="text"
+          name=""
+          id=""
+        />
+        <button onclick="startWith()">startsWith(n)</button>
+      </div>
+
+      <div class="flex">
+        <input
+          class="wd100 pad5 slice2 endWith"
+          value="d"
+          type="text"
+          name=""
+          id=""
+        />
+        <button onclick="endWith()">endsWith(n)</button>
+      </div>
+
+      <div class="flex">
+        <input
+          class="wd100 pad5 slice2 includes"
+          value="el"
+          type="text"
+          name=""
+          id=""
+        />
+        <button onclick="includes1()">includes(n)</button>
+      </div>
+
+      <div class="flex">
+        <input
+          class="wd100 pad5 padstart"
+          value="12,!"
+          type="text"
+          name=""
+          id=""
+        />
+        <button onclick="padstart()">padStart(n)</button>
+      </div>
+
+      <div class="flex">
+        <input
+          class="wd100 pad5 padend"
+          value="12,!"
+          type="text"
+          name=""
+          id=""
+        />
+        <button onclick="padend()">padEnd(a, b)</button>
+      </div>
+    </div>
+
+    <script>
+      let string = "hello world";
+
+      function changeString(e) {
+        string = e.value;
+      }
+
+      function length() {
+        alert2(string.length);
+      }
+
+      function charAt() {
+        let a = q(".charAt").value;
+        alert2(string.charAt(a));
+      }
+
+      function slice() {
+        let parameter = q(".slice").value.split(",");
+        let [a, b] = parameter;
+
+        let slice = string.slice(a, b);
+        alert2(slice);
+      }
+
+      function slice2() {
+        let parameter = q(".slice2").value.split(",");
+        let [a, b] = parameter;
+
+        let slice = string.slice(a, b);
+        alert2(slice);
+      }
+
+      function replace() {
+        let x = q(".replace").value.split(",");
+
+        let [a, b] = x;
+        let replace = string.replace(a, b);
+        alert2(replace);
+      }
+
+      function replaceall() {
+        let x = q(".replaceall").value.split(",");
+
+        let [a, b] = x;
+        let replaceall = string.replaceAll(a, b);
+        alert2(replaceall);
+      }
+
+      function toLowerCase1() {
+        let a = string.toLowerCase();
+
+        alert2(a);
+      }
+
+      function toUpperCase1() {
+        let a = string.toUpperCase();
+
+        alert2(a);
+      }
+
+      function trimstart() {
+        let a = string.trim();
+
+        alert2(a);
+      }
+
+      function split1() {
+        let a = string.split("");
+
+        alert2(a);
+      }
+
+      function split2() {
+        let a = string.split("");
+
+        alert2(a);
+      }
+
+      function repeata() {
+        let x = q(".repeat").value;
+        let a = string.repeat(x);
+
+        alert2(a);
+      }
+
+      function startWith() {
+        let x = q(".startWith").value;
+        let a = string.startsWith(x);
+
+        alert2(a);
+      }
+
+      function endWith() {
+        let x = q(".endWith").value;
+        let a = string.endsWith(x);
+
+        alert2(a);
+      }
+
+      function includes1() {
+        let x = q(".includes").value;
+        let a = string.includes(x);
+
+        alert2(a);
+      }
+
+      function padstart() {
+        let x = q(".padstart").value.split(",");
+        let [a, b] = x;
+
+        let z = string.padStart(a, b);
+        alert2(z);
+      }
+
+      function padend() {
+        let x = q(".padend").value.split(",");
+        let [a, b] = x;
+
+        let z = string.padEnd(a, b);
+        alert2(z);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../js/helper.js"></script>
+    <script src="../js/modal.js"></script>
+  </head>
+  <style>
+    :root {
+      --color1: red;
+    }
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <h1>Long press event</h1>
+
+    <button>Button</button>
+
+    <script>
+      let timer = 0;
+      let interval;
+
+      q("button").addEventListener("mousedown", () => {
+        interval = setInterval(() => {
+          timer++;
+        }, 1000);
+      });
+
+      q("button").addEventListener("mouseup", () => {
+        if (timer < 1) {
+          clearInterval(interval);
+          timer = 0;
+          return;
+        }
+
+        alert2("sucess");
+      });
+
+      k("`", () => {
+        alert2(timer);
+      });
+    </script>
+  </body>
+</html>

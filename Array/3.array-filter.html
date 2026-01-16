@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/main.css" />
+    <script src="../../js/helper.js"></script>
+    <script src="../../js/modal.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <h1>Array filter</h1>
+
+    <div class="p-abs tp120">
+      <select class="px18 padtb5 padrl5 noutline method" name="" id="">
+        <option value="filter">filter</option>
+        <option value="find">find</option>
+        <option value="map">Map</option>
+      </select>
+
+      <select class="px18 padtb5 padrl5 noutline condition" name="" id="">
+        <option value="includes">includes</option>
+        <option value="startsWith">startsWith</option>
+        <option value="endsWith">endsWith</option>
+        <option value="toLowerCase">toLowerCase</option>
+        <option value="toUpperCase">toUpperCase</option>
+      </select>
+
+      <input
+        class="px18 padtb5 padrl5 noutline wd100 input"
+        type="text"
+        name=""
+        id=""
+      />
+    </div>
+    <script>
+      let array = ["Jonathan", "Marko", "Albert"];
+      array.forEach((i) => {
+        let div = create("div");
+        let p = create("p");
+        p.innerText = i;
+        q("body").append(p);
+      });
+
+      function transform() {
+        let method = q(".method").value;
+        let condition = q(".condition").value;
+        let input = q(".input").value;
+
+        let a = array[method]((i) =>
+          input ? i[condition](input) : i[condition]()
+        );
+
+        alert2(a);
+      }
+
+      k("`", () => {
+        transform();
+      });
+    </script>
+  </body>
+</html>

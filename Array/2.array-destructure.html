@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/main.css" />
+    <script src="../../js/helper.js"></script>
+    <script src="../../js/modal.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <script>
+      const students = ["Jason", "Mark", "Kenneth", "Jefry"];
+
+      //ARRAY DESCTRUCTURING//
+      const [una, dos, tres, quatro, singko] = students;
+      alert2(quatro);
+
+      //REST OF ELEMENTS - returns the those element that has not been assign a variable
+      var [aa, bb, ...rest] = students;
+      alert2(rest);
+
+      //DEFAULT Values if the array element is shorter
+      var [aa, bb, cc, dd, ee = "Dennis"] = students;
+      alert2(ee);
+
+      let younger = "Rasid";
+      let older = "Rasul";
+
+      [younger, older] = [older, younger];
+      //   popdown(older);
+    </script>
+  </body>
+</html>

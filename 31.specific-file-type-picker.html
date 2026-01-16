@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../js/helper.js"></script>
+    <script src="../js/modal.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <h1 class="mt10 green">Specific File Picker</h1>
+    <input type="file" hidden onchange="updatePreview(this)" id="file" name="" id="" />
+    <button onclick="setChoosen('image')">Image</button>
+    <button onclick="setChoosen('video')">Video</button>
+    <button onclick="setChoosen('audio')">Audio</button>
+    <button onclick="setChoosen('.pdf')">PDF</button>
+    <script>
+      // image-extension: jpeg, png, gif, webp, avif, svg+xml, bmp, ico
+      // video-extension:mp4, webm, mov, avi, mkv,ogv
+      // audio: mp3, wav, ogg, m4a, aac, flac, webm
+      //documents: pdf, doc, docx, txt, rtf
+
+      //for multiple file same type
+      //accept = "image/png,image/jpeg"
+
+      //for multiple file different type
+      //accept = "image/*,video/*"
+
+      //for documents only
+      //accept = ".pdf"
+      //accept = ".pdf, .doc"
+
+      async function setChoosen(a) {
+        let input = q("#file");
+        input.type = "file";
+        input.accept = a + "/*";
+        input.click();
+      }
+
+      function updatePreview(e) {
+        let file = e.files[0];
+        alert2(file.name);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../helper.css" />
+    <script src="../../helper.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <h1 class="mt20">Functions type</h1>
+
+    <script>
+      //1. Function Declarations
+      //can be hoisted, meaning it can be called before its declared
+      //it has this property
+
+      greet();
+
+      function greet() {
+        console.log("Hi Juan");
+      }
+
+      function greet2(name) {
+        //with parameter
+        console.log(`Hi ${name}`);
+      }
+
+      function greet2(name = "juan") {
+        //with parameter default value just in case
+        console.log(`Hi ${name}`);
+      }
+
+      function add(a, b) {
+        //with two parameters
+        console.log(a + b);
+      }
+
+      function subtract() {
+        //if you want to pass value to variable
+        return 10;
+      }
+
+      //2. Function Expressions
+      //it should be called after its declared
+
+      const sayHi = function () {
+        alert("say hi");
+      };
+
+      //  sayHi()
+      //this is how you called it
+
+      //3. Arrow Functions
+      //no this property
+
+      const sayhello = () => alert("hi");
+
+      const add2 = (a, b) =>
+        a -
+        b(
+          //If one single line and no curly brackets, it automatically returns also known as implicit returns
+
+          //  alert(add2(3,2))
+
+          //4. IIFE or Immediately Invoked function expression
+
+          function () {
+            popdown("hi");
+          }
+        )();
+
+      //5 Constructor Function (for objects)
+
+      function Student(name, age, course) {
+        this.name = name;
+        this.age = age;
+        this.course = course;
+      }
+
+      const student = new Student("Juan", 16, "Teacher");
+      // popdown(student.course)
+
+      function operation() {
+        return {
+          add() {
+            alert("add");
+          },
+          minus() {
+            alert("minus");
+          },
+        };
+      }
+
+      operation().minus();
+    </script>
+  </body>
+</html>

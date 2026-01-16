@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../js/helper.js"></script>
+    <script src="../js/modal.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <header>
+      <h1 class="green mt10">Time Difference</h1>
+    </header>
+    <button class="btn bg-green" onclick="register()">Register</button>
+
+    <div class="wm ht100 br flex column">
+      <div class="wm  flex between">
+        <div class=" wm fxy"><h3>Time Posted</h2></div>
+        <div class=" wm fxy"><h3>Time Now</h2></div>
+        <div class=" wm fxy"><h3>Time Ago</h2></div>
+      </div>
+
+      <div class="wm br ht100  flex column data list">
+        
+      </div>
+    </div>
+    <script>
+
+        let time = JSON.parse(localStorage.getItem("time")) || []
+    
+        function register(){
+        let timeNow = new Date()
+
+        time.push(timeNow)
+        localStorage.setItem("time", JSON.stringify(time))
+        display()
+        }
+
+        function display(){
+            let list = q('.list')
+            list.innerHTML = ""
+
+
+            time.forEach(ele => {
+                
+                let main = create('div')
+                main.classList.add("flex")
+                main.innerHTML = `
+                <div class="wm br ht20 fxy">${new Date(ele).toLocaleTimeString()}</div>
+                <div class="wm br ht20 fxy">${new Date().toLocaleTimeString()}</div>
+                <div class="wm br ht20 fxy">${timeAgo(ele)}</div>
+                    `
+
+                    list.append(main)
+            })
+        
+        }
+
+
+        function timeAgo(dateString) {
+  const postDate = new Date(dateString);
+  const now = new Date();
+
+  const diffMs = now - postDate; // difference in milliseconds
+  const diffSec = Math.floor(diffMs / 1000);
+  const diffMin = Math.floor(diffSec / 60);
+  const diffHr = Math.floor(diffMin / 60);
+  const diffDay = Math.floor(diffHr / 24);
+
+  if (diffSec < 60) return "just now";
+  if (diffMin < 60) return `${diffMin}m`;
+  if (diffHr < 24) return `${diffHr}h`;
+  if (diffDay < 7) return `${diffDay}d`;
+
+  // For older posts, show the actual date
+  return postDate.toLocaleDateString(undefined, {
+    month: "short",
+    day: "numeric",
+  });
+}
+
+        window.onload = () => {
+            display()
+        }
+    </script>
+  </body>
+</html>

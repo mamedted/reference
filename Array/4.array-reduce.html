@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/main.css" />
+    <script src="../../js/helper.js"></script>
+    <script src="../../js/modal.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <input
+      type="text"
+      oninput="filterList(this)"
+      placeholder="search"
+      name=""
+      id="search"
+    />
+
+    <div class="list"></div>
+
+    <script>
+      let pogi = ["Kenneth", "John", "Kenneth"];
+
+      function displaylist() {
+        q(".list").innerHTML = "";
+        pogi.forEach((i, index) => {
+          let p = create("p");
+          p.innerText = index + 1 + ". " + i;
+          q(".list").append(p);
+        });
+      }
+
+      displaylist();
+
+      function filterList(e) {
+        let search = e.value;
+
+        let filter = pogi.reduce((acc, name, index) => {
+          if (name.includes(search)) {
+            acc.push({ name, index });
+          }
+          return acc;
+        }, []);
+
+        q(".list").innerHTML = "";
+
+        filter.forEach((data) => {
+          let p = create("p");
+          p.innerText = data.index + 1 + ". " + data.name;
+          q(".list").append(p);
+        });
+      }
+    </script>
+  </body>
+</html>

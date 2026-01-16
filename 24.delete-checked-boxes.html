@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../js/helper.js"></script>
+    <script src="../js/modal.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <h1 class="mt20 green">Delete Checked Boxes</h1>
+
+    <div class="flex column preview pad5 gap5 br wh100 br"></div>
+    <button onclick="del()">Delete</button>
+    <script>
+      const array = ["Mango", "Orange", "Banana", "Grapes"];
+
+      function display() {
+        q(".preview").innerHTML = "";
+        array.forEach((ele) => {
+          let div = create("div");
+          div.classList.add("flex");
+          div.innerHTML = `
+        <input type="checkbox" class="bg-red" value=${ele}>
+        <p>${ele}</p>
+        `;
+          q(".preview").append(div);
+        });
+      }
+
+      function del() {
+        let checked = [...qa(".preview input[type=checkbox]:checked")].map((i) => i.value);
+        checked.forEach((ele) => {
+          let index = array.indexOf(String(ele));
+
+          array.splice(index, 1);
+        });
+
+        display();
+      }
+
+      display();
+    </script>
+  </body>
+</html>

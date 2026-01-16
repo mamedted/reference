@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../js/helper.js"></script>
+    <script src="../js/modal.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <h1 class="green mt10">Enter OTP</h1>
+
+    <main class="wd300 flex gap5 fcx pad5">
+      <input type="number" class="wh50 padl15 px20" maxlength="1" oninput="jump(this)" name="" id="" />
+      <input type="number" class="wh50 padl15 px20" maxlength="1" oninput="jump(this)" name="" id="" />
+      <input type="number" class="wh50 padl15 px20" maxlength="1" oninput="jump(this)" name="" id="" />
+      <input type="number" class="wh50 padl15 px20" maxlength="1" oninput="jump(this), enable(this)" name="" id="" />
+    </main>
+
+    <button class="btn bg-green d-n nooutline">Verify</button>
+
+    <script>
+      function jump(e) {
+        if (e.value) {
+          e.nextElementSibling.focus();
+        } else {
+          e.previousElementSibling.focus();
+        }
+      }
+
+      let inputs = Array.from(qa("main > input"));
+
+      let isComplete = inputs.some((inp) => inp.value === "");
+
+      inputs.forEach((ele, ind) => {
+        ele.addEventListener("keydown", function (e) {
+          if (e.key === "Backspace") {
+            setTimeout(() => {
+              inputs[ind - 1].select();
+            }, 10);
+          }
+        });
+
+        //optional when you want to enable button
+        ele.addEventListener("input", function () {
+          let isComplete = inputs.some((inp) => inp.value === "");
+          isComplete ? q("button").classList.add("d-n") : q("button").classList.remove("d-n"), q("button").focus();
+        });
+        //optional when you want to overwrite value when you select it
+        ele.addEventListener("click", function () {
+          ele.select();
+        });
+      });
+    </script>
+  </body>
+</html>

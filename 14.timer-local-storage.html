@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/main.css" />
+    <script src="../../js/helper.js"></script>
+    <script src="../../js/modal.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <p class="num">
+      <span class="b px40 sec"></span></span>
+    </p>
+
+    <button onclick="startTimer()">Start</button>
+    <button onclick="pause()">Pasue</button>
+    <script>
+  
+      let text = q(".sec");
+      let sec 
+      let timer = localStorage.getItem("timer") || 0
+  
+      let interval;
+
+      function startTimer() {
+        interval = setInterval(() => {
+          timer++;
+          sec = Math.round( timer / 100)
+          localStorage.setItem("timer", sec)
+          text.innerText = sec;
+
+        }, 10);
+      }
+
+      function pause() {
+        clearInterval(interval);
+      }
+
+      window.onload = () => {
+        
+        text.innerText = timer;
+
+      }
+
+      k('`', () => { alert2(timer)})
+    </script>
+  </body>
+</html>

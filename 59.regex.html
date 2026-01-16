@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../js/helper.js"></script>
+    <script src="../js/modal.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+    input {
+      padding: 5px;
+      outline: none;
+      font-size: 16px;
+      width: 20%;
+    }
+    p {
+      font-weight: bold;
+      font-size: 20px;
+    }
+  </style>
+  <body>
+    <h1 class="green">Regex</h1>
+
+    <div class="flex column wdp90 mt50">
+      <div class="flex fcy between pad5">
+        <input type="text" name="" id="string" />
+        <input value="\d" type="text" name="" id="method" />
+        <p>TRUE</p>
+      </div>
+
+      <button onclick="test()" class="pad5 bn px20 mt10 bg-green white">Test</button>
+    </div>
+    <div class="flex column mt15 gap10">
+      <p>/ /.test(string) formula</p>
+      <p>\d at least one digit</p>
+      <p>\d{3,} at least 3 digit</p>
+      <p>\d{3} exact three digit</p>
+      <p>^\d{3}$ exact three digit only</p>
+      <p>\d{3, 8} min of 3 digit and max of 8</p>
+      <p>^\d{3, 8}$ min of 3 digit and max of 8 only</p>
+    </div>
+    <script>
+      function test() {
+        let string = document.querySelector("#string").value;
+        let method = new RegExp(document.querySelector("#method").value);
+
+        let result = method.test(string);
+        alert2(result);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../js/helper.js"></script>
+    <script src="../js/modal.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <h1 class="green mt10">Sending file to php</h1>
+    <input type="file" name="" id="" onchange="setSelectedPhoto(this)" />
+    <button onclick="send()">send</button>
+    <script>
+      let selectedFile = null;
+
+      function setSelectedPhoto(e) {
+        let file = e.files[0];
+
+        if (!file) return aler2("Choose a file first");
+        selectedFile = file;
+      }
+
+      function send() {
+        let data = new FormData();
+        data.append("file", selectedFile);
+
+        fetch("server.php", {
+          method: "POST",
+          body: data
+        })
+          .then((res) => res.text())
+          .then((data) => console.log(data));
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Smart ID Reader</title>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
+    <style>
+      body {
+        font-family: Arial;
+        padding: 20px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .upload-area {
+        border: 3px dashed #2196f3;
+        padding: 40px;
+        text-align: center;
+        border-radius: 10px;
+        cursor: pointer;
+        background: #f5f5f5;
+      }
+      input[type="file"] {
+        display: none;
+      }
+      .preview {
+        max-width: 100%;
+        max-height: 400px;
+        border: 2px solid #ddd;
+        margin: 20px 0;
+      }
+      button {
+        width: 100%;
+        padding: 15px;
+        background: #2196f3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 10px 0;
+      }
+      button:disabled {
+        background: #ccc;
+      }
+      .result-card {
+        background: white;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 20px;
+      }
+      .field {
+        display: flex;
+        padding: 10px;
+        border-bottom: 1px solid #f0f0f0;
+      }
+      .field label {
+        font-weight: bold;
+        width: 150px;
+        color: #666;
+      }
+      .field input {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      .progress {
+        background: #fff3cd;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 10px 0;
+        display: none;
+      }
+      .raw-text {
+        background: #f5f5f5;
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 20px;
+        font-family: monospace;
+        white-space: pre-wrap;
+        max-height: 200px;
+        overflow-y: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🪪 Smart ID Card Reader</h1>
+
+    <div class="upload-area" onclick="document.getElementById('idCard').click()">
+      <h2>📸 Upload ID Card</h2>
+      <p>Supports: Driver's License, Passport, National ID, etc.</p>
+      <input type="file" id="idCard" accept="image/*" />
+    </div>
+
+    <div id="previewContainer" style="display: none; text-align: center">
+      <img id="preview" class="preview" />
+    </div>
+
+    <button id="scanBtn" onclick="scanAndParse()" style="display: none">Extract Information</button>
+
+    <div id="progress" class="progress"></div>
+
+    <div id="results" style="display: none">
+      <div class="result-card">
+        <h2>📋 Extracted Information</h2>
+
+        <div class="field">
+          <label>Full Name:</label>
+          <input type="text" id="fullName" readonly />
+        </div>
+
+        <div class="field">
+          <label>Date of Birth:</label>
+          <input type="text" id="dob" readonly />
+        </div>
+
+        <div class="field">
+          <label>ID Number:</label>
+          <input type="text" id="idNumber" readonly />
+        </div>
+
+        <div class="field">
+          <label>Address:</label>
+          <input type="text" id="address" readonly />
+        </div>
+
+        <div class="field">
+          <label>Expiry Date:</label>
+          <input type="text" id="expiry" readonly />
+        </div>
+
+        <button onclick="copyToForm()">Copy to Form</button>
+      </div>
+
+      <details style="margin-top: 20px">
+        <summary style="cursor: pointer; font-weight: bold">View Raw Text</summary>
+        <div id="rawText" class="raw-text"></div>
+      </details>
+    </div>
+
+    <script>
+      let imageFile = null;
+      let extractedData = {};
+
+      document.getElementById("idCard").addEventListener("change", function (e) {
+        imageFile = e.target.files[0];
+
+        if (imageFile) {
+          const reader = new FileReader();
+          reader.onload = function (event) {
+            document.getElementById("preview").src = event.target.result;
+            document.getElementById("previewContainer").style.display = "block";
+            document.getElementById("scanBtn").style.display = "block";
+            document.getElementById("results").style.display = "none";
+          };
+          reader.readAsDataURL(imageFile);
+        }
+      });
+
+      async function scanAndParse() {
+        const progress = document.getElementById("progress");
+        const scanBtn = document.getElementById("scanBtn");
+
+        progress.style.display = "block";
+        progress.innerHTML = "⏳ Scanning ID card...";
+        scanBtn.disabled = true;
+
+        try {
+          // Perform OCR
+          const result = await Tesseract.recognize(imageFile, "eng", {
+            logger: (m) => {
+              if (m.status === "recognizing text") {
+                const percent = Math.round(m.progress * 100);
+                progress.innerHTML = `⏳ Processing... ${percent}%`;
+              }
+            }
+          });
+
+          const text = result.data.text;
+          console.log("Extracted text:", text);
+
+          // Parse the text to extract fields
+          extractedData = parseIDCard(text);
+
+          // Display results
+          displayResults(text, extractedData);
+
+          progress.style.display = "none";
+        } catch (error) {
+          console.error("Error:", error);
+          progress.innerHTML = "❌ Error processing image. Please try again.";
+        } finally {
+          scanBtn.disabled = false;
+        }
+      }
+
+      function parseIDCard(text) {
+        const data = {
+          fullName: "",
+          dob: "",
+          idNumber: "",
+          address: "",
+          expiry: ""
+        };
+
+        // Regular expressions for common patterns
+
+        // Date patterns (MM/DD/YYYY, DD-MM-YYYY, etc.)
+        const datePattern = /\b(\d{1,2}[-/]\d{1,2}[-/]\d{2,4}|\d{4}[-/]\d{1,2}[-/]\d{1,2})\b/g;
+        const dates = text.match(datePattern) || [];
+
+        // ID Number patterns (varies by country)
+        const idPattern = /\b([A-Z0-9]{6,15})\b/g;
+        const ids = text.match(idPattern) || [];
+
+        // Name pattern (capitalized words)
+        const namePattern = /([A-Z][a-z]+ [A-Z][a-z]+(?:\s[A-Z][a-z]+)?)/;
+        const nameMatch = text.match(namePattern);
+
+        // Fill in extracted data
+        if (nameMatch) data.fullName = nameMatch[0];
+        if (dates.length > 0) data.dob = dates[0];
+        if (dates.length > 1) data.expiry = dates[1];
+        if (ids.length > 0) data.idNumber = ids[0];
+
+        // Try to extract address (lines with numbers and street indicators)
+        const addressPattern = /(\d+\s+[A-Za-z\s]+(?:Street|St|Avenue|Ave|Road|City|Boulevard|Blvd|Drive|Dr)[^,]*)/i;
+        const addressMatch = text.match(addressPattern);
+        if (addressMatch) data.address = addressMatch[0];
+
+        return data;
+      }
+
+      function displayResults(rawText, data) {
+        document.getElementById("results").style.display = "block";
+        document.getElementById("rawText").textContent = rawText;
+
+        document.getElementById("fullName").value = data.fullName || "Not found";
+        document.getElementById("dob").value = data.dob || "Not found";
+        document.getElementById("idNumber").value = data.idNumber || "Not found";
+        document.getElementById("address").value = data.address || "Not found";
+        document.getElementById("expiry").value = data.expiry || "Not found";
+      }
+
+      function copyToForm() {
+        // This would copy the data to another form
+        alert("Data extracted:\n\n" + "Name: " + extractedData.fullName + "\n" + "DOB: " + extractedData.dob + "\n" + "ID: " + extractedData.idNumber + "\n" + "Address: " + extractedData.address);
+      }
+    </script>
+  </body>
+</html>

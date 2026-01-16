@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+    p {
+      font-size: 80px;
+      margin-top: 100px;
+    }
+  </style>
+  <body>
+    <h1>TIMER</h1>
+    <p id="timerBox">60</p>
+    <button id="startBtn" onclick="handleStart()">Start</button>
+    <button id="pauseBtn" onclick="handleStop()">Pause</button>
+    <button id="resetBtn" onclick="handleReset()">Reset</button>
+
+    <script>
+      let timerBox = document.querySelector("#timerBox");
+
+      let timer = localStorage.getItem("timer11") || 10;
+
+      let intervalID;
+
+      let isRunning = localStorage.getItem("state11") || false;
+
+      function handleStart() {
+        isRunning = true;
+        localStorage.setItem("state11", isRunning);
+
+        intervalID = setInterval(() => {
+          timer--;
+          localStorage.setItem("timer11", timer);
+
+          timerBox.innerHTML = timer;
+
+          if (timer == -1) {
+            alert("Time is up!");
+            timer = 10;
+            localStorage.setItem("timer11", timer);
+          }
+        }, 1000);
+      }
+
+      function handleStop() {
+        isRunning = false;
+        localStorage.setItem("state11", isRunning);
+
+        clearInterval(intervalID);
+      }
+
+      function handleReset() {
+        timer = 10;
+
+        localStorage.setItem("timer11", timer);
+        timerBox.innerHTML = timer;
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        timerBox.innerHTML = timer;
+
+        if (isRunning == "true") {
+          handleStart();
+        } else {
+          handleStop();
+        }
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key == "~") {
+          alert(isRunning);
+        }
+      });
+    </script>
+  </body>
+</html>

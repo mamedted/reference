@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+    #listBox {
+      width: 30%;
+      height: 70%;
+      border: 1px solid black;
+      padding: 30px 20px;
+    }
+  </style>
+  <body>
+    <h1>Register a candidate</h1>
+    <input type="text" name="" id="nameInput" />
+    <button onclick="handleRegisterBtn()">Register</button>
+    <input type="number" name="" id="limit" placeholder="Limit the number of selection" oninput="handleLimiter()" />
+
+    <div id="listBox"></div>
+
+    <script>
+      let nameInput = document.querySelector("#nameInput");
+      let listBox = document.querySelector("#listBox");
+      let limit = document.querySelector("#limit");
+
+      let list = [];
+
+      function handleRegisterBtn() {
+        list.push(nameInput.value);
+
+        renderList();
+      }
+
+      function renderList() {
+        listBox.innerHTML = "";
+
+        list.forEach((i) => {
+          let div = document.createElement("div");
+          div.innerHTML = `<input type=checkbox onchange = "disabledCheckbox()" value=${i}><p>${i}</p>`;
+          div.style.display = "flex";
+          listBox.appendChild(div);
+        });
+      }
+
+      function handleLimiter() {}
+
+      function disabledCheckbox() {
+        let allCheckBox = document.querySelectorAll("input[type = checkbox]:checked");
+
+        if (allCheckBox.length >= limit.value) {
+          let allUncheckeDBox = document.querySelectorAll("input[type = checkbox]:not(:checked)");
+
+          allUncheckeDBox.forEach((i) => {
+            i.disabled = true;
+          });
+        } else {
+          let allUncheckeDBox = document.querySelectorAll("input[type = checkbox]:not(:checked)");
+
+          allUncheckeDBox.forEach((i) => {
+            i.disabled = false;
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

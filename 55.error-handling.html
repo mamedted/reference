@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../js/helper.js"></script>
+    <script src="../js/modal.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <h1 class="green mt10">Error Handling</h1>
+    <button onclick="increase()">increase</button>
+
+    <script>
+      //   let a = 0;
+
+      function increase() {
+        try {
+          a++;
+          alert2(a);
+        } catch (error) {
+          console.log(error);
+        } finally {
+          console.log("for clean up");
+        }
+
+        setTimeout(() => {
+          console.log("run after 1 second.");
+        }, 1000);
+      }
+    </script>
+  </body>
+</html>

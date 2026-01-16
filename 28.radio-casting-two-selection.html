@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+    #table {
+      width: 60%;
+      height: 300px;
+      border: 1px solid black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 40px;
+      padding-top: 15px;
+    }
+    #tableBody {
+      width: 100%;
+      height: 100%;
+      border-top: 2px solid black;
+    }
+    #tableBodyHeading {
+      width: 100%;
+      height: 30%;
+      border-bottom: 1px solid black;
+      display: flex;
+      font-weight: bold;
+    }
+    #tableBodyFooter {
+      width: 100%;
+      height: 20%;
+      border-top: 2px solid black;
+      display: flex;
+    }
+    #tableBodyFooter > DIV:nth-child(1) {
+      width: 90%;
+
+      display: flex;
+      align-items: center;
+      padding-left: 20px;
+    }
+    #tableBodyFooter > DIV:nth-child(2) {
+      width: 10%;
+
+      display: flex;
+      align-items: center;
+      padding-left: 32px;
+    }
+    #tableBodyHeading > div:nth-child(1) {
+      width: 70px;
+    }
+    #tableBodyHeading > div:nth-child(2) {
+      width: calc(100% - 170px);
+    }
+    #tableBodyHeading > div:nth-child(3) {
+      width: 100px;
+    }
+    #tableBodyHeading > div {
+      display: flex;
+      align-items: center;
+    }
+    #tableEntries {
+      width: 100%;
+      height: 130px;
+    }
+    #tableEntries > div {
+      width: 100%;
+      height: calc(100% / 3);
+
+      display: flex;
+    }
+    #tableEntries > div > div:nth-child(1) {
+      width: 70px;
+
+      display: flex;
+      align-items: center;
+      padding-left: 25px;
+    }
+    #tableEntries > div > div:nth-child(2) {
+      width: calc(100% - 170px);
+
+      display: flex;
+      align-items: center;
+    }
+    #tableEntries > div > div:nth-child(3) {
+      width: 100px;
+
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 40px;
+      align-items: center;
+    }
+    #table2 {
+      width: 80%;
+      height: 150px;
+      border: 1px solid black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 40px;
+      padding-top: 15px;
+    }
+    #table2Body {
+      width: 100%;
+      height: 100%;
+
+      display: flex;
+    }
+    #table2Body > div {
+      width: calc(100% / 3);
+      height: 100%;
+      border: 1px solid black;
+      border-top: 2px solid black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 22px;
+    }
+    #castBtn {
+      font-size: 20px;
+      padding: 4px 6px;
+      margin-top: 10px;
+    }
+    input[type="radio"] {
+      transform: scale(1.5);
+      margin-right: 10px;
+    }
+  </style>
+  <body>
+    <div id="table">
+      <h2>Official Tally</h2>
+
+      <div id="tableBody">
+        <div id="tableBodyHeading">
+          <div>
+            <p>Number</p>
+          </div>
+
+          <div>
+            <p>Candidate Name</p>
+          </div>
+
+          <div>
+            <p>Total votes</p>
+          </div>
+        </div>
+
+        <div id="tableEntries">
+          <div>
+            <div>1</div>
+            <div>Rodrigo Duterte</div>
+            <div><p id="DutereVotesBox">0</p></div>
+          </div>
+
+          <div>
+            <div>2</div>
+            <div>Mar Roxas</div>
+            <div><p id="RoxasVotesBox">0</p></div>
+          </div>
+
+          <div>
+            <div>3</div>
+            <div>Leni Robredo</div>
+            <div><p id="RobredoVotesBox">0</p></div>
+          </div>
+        </div>
+
+        <div id="tableBodyFooter">
+          <div>
+            <p>TOTAL VOTERS</p>
+          </div>
+          <div>
+            <p id="totalVoterBox">0</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="table2">
+      <h1>OFFICIAL BALLOT</h1>
+      <div id="table2Body">
+        <div>
+          <input type="radio" value="0" id="" />
+          <p>1. RODRIOG ROA DUTERTE</p>
+        </div>
+        <div>
+          <input type="radio" value="1" id="" />
+          <p>2. MAR ROXAS</p>
+        </div>
+        <div>
+          <input type="radio" value="2" id="" />
+          <p>3. LENI ROBREDO</p>
+        </div>
+      </div>
+    </div>
+    <button id="castBtn" onclick="handleCastBnt()">Cast your vote</button>
+    <script>
+      let DutereVotesBox = document.querySelector("#DutereVotesBox");
+      let RoxasVotesBox = document.querySelector("#RoxasVotesBox");
+      let RobredoVotesBox = document.querySelector("#RobredoVotesBox");
+      let totalVoterBox = document.querySelector("#totalVoterBox");
+
+      let tableEntries = document.querySelector("#tableEntries");
+
+      let allRadiosChecked;
+      let allRadios = document.querySelectorAll("input[type=radio]");
+
+      let DuterteTotalVotes = 0;
+      let RoxasTotalVote = 0;
+      let RobredoTotalVotes = 0;
+
+      let choosenCandidate = [0, 0, 0];
+
+      let isClick = false;
+      let isClickAgain = false;
+
+      let counter = [0, 0, 0];
+
+      function handleCastBnt() {
+        if (choosenCandidate[0] == 1) DuterteTotalVotes++;
+        if (choosenCandidate[1] == 1) RoxasTotalVote++;
+        if (choosenCandidate[2] == 1) RobredoTotalVotes++;
+
+        DutereVotesBox.innerHTML = DuterteTotalVotes;
+        RoxasVotesBox.innerHTML = RoxasTotalVote;
+        RobredoVotesBox.innerHTML = RobredoTotalVotes;
+        totalVoterBox.innerHTML = DuterteTotalVotes + RobredoTotalVotes + RoxasTotalVote;
+
+        choosenCandidate = [0, 0, 0];
+        counter = [0, 0, 0];
+
+        allRadios.forEach((i) => {
+          i.checked = false;
+          i.disabled = false;
+        });
+      }
+
+      allRadios.forEach((i) => {
+        i.addEventListener("click", () => {
+          counter[i.value]++;
+
+          if (counter[i.value] == 2) {
+            i.checked = false;
+            counter[i.value] = 0;
+          }
+
+          allRadiosChecked = document.querySelectorAll("input[type=radio]:checked");
+          allRadiosNotChecked = document.querySelectorAll("input[type=radio]:not(:checked)");
+
+          if (allRadiosChecked.length <= 1) {
+            choosenCandidate[i.value] = 1;
+            if (counter[i.value] == 0) {
+              choosenCandidate[i.value] = 0;
+            }
+          }
+
+          if (allRadiosChecked.length >= 2) {
+            choosenCandidate[i.value] = 1;
+
+            allRadiosNotChecked.forEach((i) => {
+              i.disabled = true;
+            });
+          } else {
+            allRadiosNotChecked.forEach((i) => {
+              i.disabled = false;
+            });
+          }
+        });
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key == "`") {
+          // 		alert(`Duterte: ${DuterteTotalVotes}
+          // Roxas: ${RoxasTotalVote}
+          // Robredo: ${RobredoTotalVotes}
+          // `)
+
+          // alert(counter[0])
+
+          // alert(allRadiosChecked.length)
+          // alert(choosenCandidate)
+
+          let allBoxVoteGarnered = tableEntries.querySelectorAll("p");
+
+          let arr = Array.from(allBoxVoteGarnered);
+
+          alert(arr[0]);
+        }
+      });
+    </script>
+  </body>
+</html>

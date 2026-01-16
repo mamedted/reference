@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../js/helper.js"></script>
+    <script src="../js/modal.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow-y: auto;
+      align-items: center;
+    }.main > div{
+      border: 1px solid black;
+      padding: 10px;
+    }
+  </style>
+  <body>
+    <h1 class="green">Regular Expression</h1>
+    <div class="flex main column  wm pad5 padl10 gap10 column">
+      <div>
+        <h3>Creating a regex</h4>
+        <p><i>/pattern/</i></p>
+        <p><i>let regex2 = new RegExp('pattern')</i></p>
+      </div>
+      <div>
+        <h3>Methods</h3>
+        <p><b> test()</b>  returns true/false</p>
+        <p><b> match()</b>  returns array of matches or null</p>
+        <p><b> replace()</b>  replace matched patterns</p>
+        <p><b> search()</b>  returns index of first match</p>
+      </div>
+
+      <div>
+        <h3>Flags</h3>
+        <p>/pattern/flags</p>
+        <p><b>g</b> find all matches</p>
+        <p><b>i</b> case insensitive</p>
+        <p><b>m</b>  multiline node</p>
+        <p><b>s</b> dot all</p>
+      </div>
+
+      <div>
+        <h3>Character classes</h3>
+        <p>SPECIAL CHARACTER</p>
+        <p><b>.</b> maches any character except new line</p>
+        <p><b>\d </b> matches all digit</p>
+        <p><b>\D </b> matches all non digit</p>
+        <p><b>\w </b> matches letter/numberic character</p>
+        <p><b>\W </b> matches non letter/numberic character</p>
+        <p><b>\s </b> matches whitespace(space,tab,newline)</p>
+        <p><b>\S </b> matches non-whitespace</p>
+
+        <h3 class="mt10">CUSTOM CHARACTER</h3>
+        <p><b>[abc]</b> matches a, b, or c</p>
+        <p><b>[a-z]</b> matches any letter from a to z</p>
+        <p><b>[^abc]</b> matches anything excpet  a, b, and c</p>
+       
+      </div>
+
+      <div>
+        <h3>Quantifiers</h3>
+        <p><b>*</b>  0 or more times</p>
+        <p><b>+</b>  1 or more times</p>
+        <p><b>?</b>  0 or 1 times, optional</p>
+        <p><b>{n}</b> exactly n times</p>
+        <p><b>{n,}</b> n or more times</p>
+        <p><b>{n,m}</b> between n and m times</p>
+      </div>
+    </div>
+     
+    <script></script>
+  </body>
+</html>

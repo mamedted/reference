@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../js/helper.js"></script>
+    <script src="../js/modal.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <h1 class="green mt10">Color Thief</h1>
+    <div class="wdp90 htp90 br of fxy storyBox">
+      <img class="wdp90" src="../file-shared/1000085650.jpg" alt="" />
+    </div>
+    <script>
+      // 2. Create a ColorThief instance
+      const colorThief = new ColorThief();
+
+      // 3. Get your image element
+      const img = document.querySelector("img");
+
+      // 4. Wait for the image to load, then extract the color
+      if (img.complete) {
+        // Image is already loaded
+        applyDominantColor(img);
+      } else {
+        // Wait for image to load
+        img.addEventListener("load", function () {
+          applyDominantColor(img);
+        });
+      }
+
+      function applyDominantColor(image) {
+        // Get dominant color as [r, g, b] array
+        const dominantColor = colorThief.getColor(image);
+
+        // Convert to CSS rgb format
+        const rgbColor = `rgb(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]})`;
+
+        // Apply as background color
+        q(".storyBox").style.background = rgbColor;
+
+        // Or apply to a specific element
+        // image.style.backgroundColor = rgbColor;
+        // image.parentElement.style.backgroundColor = rgbColor;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../js/helper.js"></script>
+    <script src="../js/modal.js"></script>
+  </head>
+  <style>
+    :root {
+      --color1: red;
+    }
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <script>
+      function getDeviceType() {
+        const ua = navigator.userAgent.toLowerCase();
+
+        if (/android/.test(ua)) return "Android Phone/Tablet";
+        if (/iphone/.test(ua)) return "iPhone";
+        if (/ipad/.test(ua)) return "iPad";
+        if (/ipod/.test(ua)) return "iPod";
+
+        // New iPadOS reports itself as Mac, so we check multitouch
+        if (/macintosh/.test(ua) && navigator.maxTouchPoints > 1) return "iPad (iPadOS)";
+
+        if (/windows/.test(ua)) return "Windows PC";
+        if (/macintosh/.test(ua)) return "Mac";
+        if (/linux/.test(ua)) return "Linux PC";
+
+        return "Unknown Device";
+      }
+
+      alert2(getDeviceType());
+    </script>
+  </body>
+</html>

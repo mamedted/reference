@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../js/helper.js"></script>
+    <script src="../js/modal.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <header>
+      <h1 class="green mt10 px20">Auto Play Video When Focus</h1>
+    </header>
+
+    <main class="wdp90 htp85 flex column gap20 ofy">
+      <div class="v1 wm hm">
+        <video class="wm hm" src="../file-shared/1000068234.mp4"></video>
+      </div>
+      <div class="v2 wm hm">
+        <video class="wm hm" src="../file-shared/1000073475.mp4"></video>
+      </div>
+      <div class="v3 wm hm">
+        <video class="wm hm" src="../file-shared/1000073516.mp4"></video>
+      </div>
+    </main>
+
+    <script>
+      const videos = document.querySelectorAll("video");
+
+      // Use Intersection Observer to detect visibility
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // Play when in view
+              entry.target.play();
+            } else {
+              // Pause when out of view
+              entry.target.pause();
+            }
+          });
+        },
+        { threshold: 0.6 }
+      ); // video must be 60% visible
+
+      videos.forEach((video) => observer.observe(video));
+    </script>
+  </body>
+</html>

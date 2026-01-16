@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+    #box {
+      width: 80%;
+      height: 80%;
+
+      display: flex;
+      justify-content: center;
+    }
+    #box > div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <h1>Dynamically Opening Box</h1>
+    <div>
+      <button>Box0</button>
+      <button>Box1</button>
+      <button>Box2</button>
+      <button>Box3</button>
+      <button>Box4</button>
+      <button>Box5</button>
+      <button>Box6</button>
+      <button>Box7</button>
+      <button>Box8</button>
+      <button>Box9</button>
+      <button>Box10</button>
+      <button>Box11</button>
+      <button>Box12</button>
+      <button>Box13</button>
+      <button>Box14</button>
+    </div>
+
+    <div id="box"></div>
+
+    <script>
+      let allButtons = document.querySelectorAll("button");
+      let box = document.querySelector("#box");
+
+      allButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          let inde = Array.from(allButtons).indexOf(button);
+          let allBoxes = box.querySelectorAll("div");
+
+          allBoxes.forEach((i) => {
+            if ((i.style.display = "flex")) {
+              i.style.display = "none";
+            }
+          }); //FIRST MAKE ALL THE BOX DISPLAY TO NONE
+
+          allBoxes[inde].style.display = "flex"; //LATER ON, DISPLAY THE BOX THATS BEEN CLICK
+        });
+      });
+
+      window.onload = () => {
+        for (let i = 0; i < allButtons.length; i++) {
+          let div = document.createElement("div");
+          div.style.width = "200px";
+          div.style.height = "200px";
+          div.style.border = "1px solid black";
+          div.style.display = "none";
+          div.innerHTML = "Box" + i;
+          box.append(div);
+        }
+      };
+    </script>
+  </body>
+</html>

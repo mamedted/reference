@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../helper.css" />
+    <script src="../../helper.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <script>
+      const student = {
+        name: "John",
+        age: 22,
+        gender: "Male",
+      };
+
+      //OBJECT DESTRUCTURING//
+      //BASIC SYNTAX//
+      //const {name, age} = object;
+
+      var { name, age, gender } = student;
+      //popdown(gender);
+
+      //RENAMING KEY
+      var { name: fullname, age, gender } = student;
+      //   popdown(fullname); //Instead of name, it becomes fullname
+
+      //DEFAULT VALUES
+      var { name, age, status = "tambay" } = student;
+      popdown(status);
+    </script>
+  </body>
+</html>

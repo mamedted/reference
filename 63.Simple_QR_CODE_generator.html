@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../js/helper.js"></script>
+    <script src="../js/modal.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      background: #dfe2e7;
+      overflow: hidden;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <h1>QR CODE GENERATOR</h1>
+    <input class="inp" type="text " name="" id="" />
+    <button class="btn bg-green" onclick="generate()">GENERATE</button>
+
+    <div class="qrcode wh100 br"></div>
+    <script>
+      function generate() {
+        let box = q(".qrcode");
+        box.innerHTML = "";
+        let input = q("input").value;
+
+        let qr = new QRCode(box, {
+          width: 100,
+          height: 100
+        });
+
+        qr.makeCode(input);
+      }
+    </script>
+  </body>
+</html>
